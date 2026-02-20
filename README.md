@@ -1,6 +1,6 @@
 # 🚀 Algorithms Visualizer
 
-> 🚧 **Work in Progress** >
+> 🚧 **Work in Progress** 
 
 This project is currently under active development. The core architecture is being established, and features are being rolled out in phases.
 
