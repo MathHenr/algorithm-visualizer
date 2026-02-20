@@ -3,24 +3,44 @@
 import Link from "next/link";
 import { useState } from "react";
 import clsx from "clsx";
+import {
+  BracketsIcon,
+  LayersIcon,
+  LayoutPanelLeftIcon,
+  ListOrderedIcon,
+  MoveHorizontalIcon,
+  PyramidIcon,
+  X,
+} from "lucide-react";
 
 export function Sidebar() {
   const [isOpen, setIsOpen] = useState<boolean>(false);
+  console.log(isOpen);
 
   const structures = [
-    { name: "Homepage", href: "/", icon: "📃" },
-    { name: "Array", href: "/structure/array", icon: "[ ]" },
-    { name: "Stack", href: "/structure/stack", icon: "📚" },
-    { name: "Queue", href: "/structure/queue", icon: "🚶" },
-    { name: "Deque", href: "/structure/double-ended-queue", icon: "↔️" },
+    {
+      name: "Homepage",
+      href: "/",
+      icon: <LayoutPanelLeftIcon />,
+    },
+    { name: "Array", href: "/structure/array", icon: <BracketsIcon /> },
+    { name: "Stack", href: "/structure/stack", icon: <LayersIcon /> },
+    { name: "Queue", href: "/structure/queue", icon: <ListOrderedIcon /> },
+    {
+      name: "Deque",
+      href: "/structure/double-ended-queue",
+      icon: <MoveHorizontalIcon />,
+    },
   ];
 
   return (
     <aside
       className={clsx(
-        "min-h-screen bg-slate-800 relative flex flex-col items-center p-10 text-slate-100 transition",
-        "sm:p-4 sm:rounded-tr-lg sm:rounded-br-lg",
-        isOpen ? "w-full sm:w-[60%] sm:max-w-75" : "sm:w-20 w-10",
+        "min-h-screen bg-slate-800 relative flex flex-col items-center text-slate-100",
+        "sm:p-4",
+        isOpen
+          ? "w-full p-10 sm:w-[60%] sm:max-w-75 sm:rounded-tr-lg sm:rounded-br-lg"
+          : "sm:w-20 p-2 w-fit rounded-tr-lg rounded-br-lg",
       )}
     >
       <div
@@ -32,24 +52,35 @@ export function Sidebar() {
       >
         {isOpen && (
           <>
-            <h1
-              className={clsx("font-extrabold text-2xl/tight", "sm:text-3xl")}
-            >
+            <span className={clsx("flex justify-center")}>
+              <PyramidIcon size={20} />
+            </span>
+            <h2 className={clsx("font-extrabold text-2xl/tight", "sm:text-xl")}>
               Algorithm Visualizer
-            </h1>
-            <a href="#" className={clsx("text-lg mb-4")}>
-              By Matheus
-            </a>
+            </h2>
+            <Link href="#" className={clsx("mb-2")}>
+              By{" "}
+              <span className={clsx("hover:text-slate-50/80 transition")}>
+                Matheus
+              </span>
+            </Link>
           </>
         )}
 
-        {!isOpen && <span className={clsx("mb-4")}>Logo</span>}
+        {!isOpen && (
+          <span className={clsx("text-center")}>
+            <PyramidIcon
+              onClick={() => setIsOpen(!isOpen)}
+              size={24}
+              className="cursor-pointer hover:text-slate-200/80 transition"
+            />
+          </span>
+        )}
       </div>
 
       <nav
         className={clsx(
           "flex flex-col gap-3 w-full min-h-[60vh] font-bold text-xl text-center mb-8",
-          "sm:text-lg sm:font-normal",
         )}
       >
         {/* Sidebar opened */}
@@ -61,27 +92,32 @@ export function Sidebar() {
               key={href}
               className={clsx(
                 "hover:bg-slate-300 hover:shadow-[0px_3px_15px_-1px_rgba(0,0,0,0.50)] hover:text-slate-900",
-                "rounded-sm transition flex items-center justify-center gap-4 group",
+                "rounded-sm transition flex items-center justify-center gap-4 px-4 py-2",
                 isOpen ? "" : "sm:px-4 sm:py-2",
               )}
               href={href}
+              title={name}
+              aria-label={name}
             >
-              <span>{icon} </span>
+              <span className="text-sm"> {icon} </span>
               {isOpen && <span> {name}</span>}
             </Link>
           );
         })}
       </nav>
 
-      <button
-        onClick={() => setIsOpen(!isOpen)}
-        className={clsx(
-          "w-fit px-4 py-2 rounded-xl text-xl transition cursor-pointer",
-          "hover:bg-slate-300 hover:text-slate-900",
-        )}
-      >
-        {isOpen ? <>X</> : <>O</>}
-      </button>
+      {isOpen && (
+        <X
+          onClick={() => setIsOpen(!isOpen)}
+          className={clsx(
+            "w-12 h-12 p-2 rounded-lg transition cursor-pointer",
+            isOpen
+              ? "hover:bg-red-500/50 hover:text-slate-50 sm:w-10 sm:h-10 sm:absolute sm:top-0 sm:left-0 sm:rounded-tl-none"
+              : "hover:bg-slate-50/50 hover:text-slate-900",
+            "",
+          )}
+        />
+      )}
     </aside>
   );
 }
