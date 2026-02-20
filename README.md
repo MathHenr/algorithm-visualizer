@@ -1,36 +1,51 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🚀 Algorithms Visualizer
 
-## Getting Started
+> 🚧 **Work in Progress** >
 
-First, run the development server:
+This project is currently under active development. The core architecture is being established, and features are being rolled out in phases.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## An interactive web application built with **Next.js** and **Tailwind CSS** designed to help me better visualize data structures and algorithms (DSA).
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### 1. Foundation
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- [x] Initial project setup (Next.js + Tailwind CSS)
+- [x] Project folder structure organization
+- [x] Basic layout & Sidebar "Push" logic implementation
+- [ ] Complete **App Router** migration & Route Groups
+- [ ] Global state management for algorithm control
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### 2. UI/UX & Animations
 
-## Learn More
+- [x] Collapsible Sidebar with responsive behavior
+- [x] Dynamic styling utilities (clsx & tailwind-merge)
+- [ ] **Framer Motion** integration for fluid transitions
+- [ ] Interactive User Dashboard (Play/Pause/Speed controls)
+- [ ] Dark/Light mode support
 
-To learn more about Next.js, take a look at the following resources:
+### 3. Visualization
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- [ ] **Data Structures:** (Linked Lists, Trees, Graphs)
+- [ ] Interactive data input (Randomize/Custom data sets)
+- [ ] Real-time pseudo-code highlighting
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### 4. Final Polish
 
-## Deploy on Vercel
+- [ ] Final UI/UX polish and bug fixes
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+---
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## 🛠️ Built With
+
+- **Next.js 14+** (App Router)
+- **Tailwind CSS** (Styling)
+- **TypeScript** (Type Safety)
+
+---
+
+## ✒️ Author
+
+**Matheus** -
+
+---
+
+_Last updated: February 2026_
