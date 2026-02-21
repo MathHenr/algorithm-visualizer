@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useState } from "react";
+import { usePathname } from "next/navigation";
 import clsx from "clsx";
 import {
   BracketsIcon,
@@ -15,6 +16,7 @@ import {
 
 export function Sidebar() {
   const [isOpen, setIsOpen] = useState<boolean>(false);
+  const pathname = usePathname();
 
   const structures = [
     {
@@ -85,6 +87,7 @@ export function Sidebar() {
         {/* Sidebar opened */}
         {structures.map((item) => {
           const { name, href, icon } = item;
+          const isActive = pathname === item.href;
 
           return (
             <Link
@@ -93,6 +96,7 @@ export function Sidebar() {
                 "hover:bg-slate-300 hover:shadow-[0px_3px_15px_-1px_rgba(0,0,0,0.50)] hover:text-slate-900",
                 "rounded-sm transition flex items-center justify-center gap-4 px-4 py-2",
                 isOpen ? "" : "sm:px-4 sm:py-2",
+                isActive ? "bg-slate-300 text-slate-900" : "",
               )}
               href={href}
               title={name}
