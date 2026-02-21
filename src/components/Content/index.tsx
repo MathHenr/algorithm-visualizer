@@ -13,8 +13,8 @@ export function Content({ children }: ContentProp) {
   return (
     <div
       className={clsx(
-        "hidden flex-1 h-full p-10 text-salte-900 overflow-y-auto overflow-x-hidden transition-all ease-in-out duration-5000",
-        isOpen && "sm:flex",
+        "flex-1 h-full p-10 text-salte-900 overflow-y-auto overflow-x-hidden transition-all ease-in-out duration-5000",
+        isOpen ? "max-sm:hidden" : "flex",
       )}
     >
       <div className={clsx("max-w-7xl mx-auto")}> {children} </div>
