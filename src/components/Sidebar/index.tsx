@@ -37,46 +37,41 @@ export function Sidebar() {
   return (
     <aside
       className={clsx(
-        "bg-slate-800 min-h-screen relative flex flex-col items-center text-slate-100",
-        "duration-300 ease-in-out transition-all overflow-y-auto",
+        "min-h-screen relative flex flex-col items-center bg-slate-800 text-slate-100",
+        "duration-300 ease-in-out transition-all overflow-hidden",
         isOpen
-          ? "w-fit p-10 sm:p-4 sm:max-w-75 sm:rounded-tr-lg sm:rounded-br-lg"
-          : "w-fit p-2 sm:w-20 rounded-tr-lg rounded-br-lg",
+          ? "w-64 p-2 sm:max-w-75 sm:p-4 sm:rounded-tr-lg sm:rounded-br-lg"
+          : "w-20 p-2 sm:p-4 rounded-tr-lg rounded-br-lg",
       )}
     >
       <div
         className={clsx(
-          "flex flex-col gap-4 text-center mb-16 border-b border-b-slate-200",
-          "sm:w-fit",
-          isOpen ? "" : "h-24 justify-center",
+          "flex flex-col gap-2 p-2 items-center mb-12 border-b border-b-slate-200",
         )}
       >
-        {isOpen && (
-          <>
-            <span className={clsx("flex justify-center")}>
-              <PyramidIcon size={20} />
-            </span>
-            <h2 className={clsx("font-extrabold text-2xl/tight", "sm:text-xl")}>
-              Algorithm Visualizer
-            </h2>
-            <Link href="#" className={clsx("mb-2")}>
-              By{" "}
-              <span className={clsx("hover:text-slate-50/80 transition")}>
-                Matheus
-              </span>
-            </Link>
-          </>
-        )}
+        <span className={clsx(!isOpen && "h-full flex items-center")}>
+          <PyramidIcon
+            onClick={() => setIsOpen(true)}
+            className={clsx(
+              "w-6 h-6 mx-auto transition",
+              !isOpen && "hover:text-slate-200/80 cursor-pointer",
+            )}
+          />
+        </span>
 
-        {!isOpen && (
-          <span className={clsx("text-center")}>
-            <PyramidIcon
-              onClick={() => setIsOpen(!isOpen)}
-              size={24}
-              className="cursor-pointer hover:text-slate-200/80 transition"
-            />
+        <h2
+          className={clsx(
+            isOpen ? "text-center font-extrabold text-2xl" : "hidden",
+          )}
+        >
+          Algorithm Visualizer
+        </h2>
+        <Link href="#" className={clsx("mb-2", isOpen ? "block" : "hidden")}>
+          By{" "}
+          <span className={clsx("hover:text-slate-50/80 transition")}>
+            Matheus
           </span>
-        )}
+        </Link>
       </div>
 
       <nav
