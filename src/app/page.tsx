@@ -1,11 +1,5 @@
-import { Content } from "@/components/Content";
-import { Sidebar } from "@/components/Sidebar";
+import { MainTemplate } from "@/template/MainTemplate";
 
 export default function Home() {
-  return (
-    <>
-      <Sidebar />
-      <Content />
-    </>
-  );
+  return <MainTemplate />;
 }

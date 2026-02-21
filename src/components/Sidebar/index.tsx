@@ -15,7 +15,6 @@ import {
 
 export function Sidebar() {
   const [isOpen, setIsOpen] = useState<boolean>(false);
-  console.log(isOpen);
 
   const structures = [
     {
@@ -36,11 +35,11 @@ export function Sidebar() {
   return (
     <aside
       className={clsx(
-        "min-h-screen bg-slate-800 relative flex flex-col items-center text-slate-100",
-        "sm:p-4",
+        "bg-slate-800 min-h-screen relative flex flex-col items-center text-slate-100",
+        "duration-300 ease-in-out transition-all overflow-y-auto",
         isOpen
-          ? "w-full p-10 sm:w-[60%] sm:max-w-75 sm:rounded-tr-lg sm:rounded-br-lg"
-          : "sm:w-20 p-2 w-fit rounded-tr-lg rounded-br-lg",
+          ? "w-fit p-10 sm:p-4 sm:max-w-75 sm:rounded-tr-lg sm:rounded-br-lg"
+          : "w-fit p-2 sm:w-20 rounded-tr-lg rounded-br-lg",
       )}
     >
       <div
@@ -112,9 +111,8 @@ export function Sidebar() {
           className={clsx(
             "w-12 h-12 p-2 rounded-lg transition cursor-pointer",
             isOpen
-              ? "hover:bg-red-500/50 hover:text-slate-50 sm:w-10 sm:h-10 sm:absolute sm:top-0 sm:left-0 sm:rounded-tl-none"
+              ? "hover:bg-red-500/50 hover:text-slate-50 sm:w-10 sm:h-10 absolute top-0 left-0 rounded-tl-none"
               : "hover:bg-slate-50/50 hover:text-slate-900",
-            "",
           )}
         />
       )}
