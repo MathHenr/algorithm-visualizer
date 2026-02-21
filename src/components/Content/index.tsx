@@ -1,3 +1,6 @@
+"use client";
+
+import { useSidebar } from "@/hooks/useSidebar";
 import clsx from "clsx";
 
 type ContentProp = {
@@ -5,10 +8,13 @@ type ContentProp = {
 };
 
 export function Content({ children }: ContentProp) {
+  const { isOpen } = useSidebar();
+
   return (
     <div
       className={clsx(
-        "flex-1 h-full flex p-10 text-salte-900 overflow-y-auto overflow-x-hidden transition-all ease-in-out duration-5000",
+        "hidden flex-1 h-full p-10 text-salte-900 overflow-y-auto overflow-x-hidden transition-all ease-in-out duration-5000",
+        isOpen && "sm:flex",
       )}
     >
       <div className={clsx("max-w-7xl mx-auto")}> {children} </div>

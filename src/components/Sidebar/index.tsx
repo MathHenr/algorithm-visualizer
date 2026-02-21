@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useState } from "react";
+import { useSidebar } from "@/hooks/useSidebar";
 import { usePathname } from "next/navigation";
 import clsx from "clsx";
 import {
@@ -15,7 +15,7 @@ import {
 } from "lucide-react";
 
 export function Sidebar() {
-  const [isOpen, setIsOpen] = useState<boolean>(false);
+  const { isOpen, setIsOpen } = useSidebar();
   const pathname = usePathname();
 
   const structures = [
@@ -38,9 +38,9 @@ export function Sidebar() {
     <aside
       className={clsx(
         "min-h-screen relative flex flex-col items-center bg-slate-800 text-slate-100",
-        "duration-300 ease-in-out transition-all overflow-hidden",
+        "duration-300 ease-in-out transition-[width,padding] overflow-hidden",
         isOpen
-          ? "w-64 p-2 sm:max-w-75 sm:p-4 sm:rounded-tr-lg sm:rounded-br-lg"
+          ? "w-160 p-10 sm:max-w-64 sm:p-4 sm:rounded-tr-lg sm:rounded-br-lg"
           : "w-20 p-2 sm:p-4 rounded-tr-lg rounded-br-lg",
       )}
     >
