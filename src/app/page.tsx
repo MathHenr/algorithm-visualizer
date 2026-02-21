@@ -1,5 +1,5 @@
-import { Sidebar } from "@/components/Sidebar";
+import { MainTemplate } from "@/template/MainTemplate";
 
 export default function Home() {
-  return <Sidebar />;
+  return <MainTemplate />;
 }
