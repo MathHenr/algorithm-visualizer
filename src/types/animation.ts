@@ -1,4 +1,4 @@
-export type AnimationStep<T> =
+export type AnimationStep =
   | {
       type: "VISIT" | "FOUND";
       payload: { index: number };
@@ -17,5 +17,5 @@ export type AnimationStep<T> =
 
 export interface Simulate<T> {
   finalState: T;
-  steps: AnimationStep<T>[];
+  steps: AnimationStep[];
 }
