@@ -1,12 +1,19 @@
-export interface AnimationStep<T> {
-  type: "VISIT" | "COMPARE" | "FOUND" | "ERRORS";
-  payload:
-    | { index: number }
-    | { value: T; index?: number }
-    | { from: number; to: number }
-    | null;
-  message: string;
-}
+export type AnimationStep<T> =
+  | {
+      type: "VISIT" | "FOUND";
+      payload: { index: number };
+      message: string;
+    }
+  | {
+      type: "COMPARE";
+      payload: { from: number; to: number };
+      message: string;
+    }
+  | {
+      type: "ERRORS";
+      payload: null;
+      message: string;
+    };
 
 export interface Simulate<T> {
   finalState: T;

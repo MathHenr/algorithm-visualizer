@@ -8,7 +8,7 @@ export class ArrayStructure<T> {
   }
 
   // Implementing a visual linear search
-  find(value: T): { steps: AnimationStep<T>[] } {
+  find(value: T): AnimationStep<T>[] {
     const steps: AnimationStep<T>[] = [];
 
     for (let i = 0; i < this.items.length; i++) {
@@ -25,11 +25,11 @@ export class ArrayStructure<T> {
           message: `Value found at index ${i}`,
         });
 
-        return { steps };
+        return steps;
       }
     }
     steps.push({ type: "ERRORS", payload: null, message: "Value not found" });
-    return { steps };
+    return steps;
   }
 
   update(index: number, value: T) {
