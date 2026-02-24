@@ -18,7 +18,7 @@ This project is currently under active development. The core architecture is bei
 
 - [x] Collapsible Sidebar with responsive behavior
 - [x] Dynamic styling utilities (clsx & tailwind-merge)
-- [ ] **Framer Motion** integration for fluid transitions
+- [x] **Framer Motion** integration for fluid transitions
 - [ ] Interactive User Dashboard (Play/Pause/Speed controls)
 - [ ] Dark/Light mode support
 
