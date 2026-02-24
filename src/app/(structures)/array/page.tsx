@@ -1,5 +1,6 @@
 "use client";
 
+import { ControlPanel } from "@/components/ControlPanel";
 import { ArrayStructure } from "@/core/array-structure";
 import { useAnimationPlayer } from "@/hooks/useAnimationPlayer";
 import clsx from "clsx";
@@ -10,6 +11,7 @@ export default function Array() {
   const [structure] = useState(new ArrayStructure<number>(0));
 
   const [inputValue, setInputValue] = useState("");
+  const [inputIndex, setInputIndex] = useState("");
 
   const [displayArray, setDisplayArray] = useState<(number | null)[]>([]);
 
@@ -21,11 +23,11 @@ export default function Array() {
 
   async function handleUpdate() {
     const val = parseInt(inputValue);
+    const idx = inputIndex ? parseInt(inputIndex) : structure.get().length;
 
-    if (isNaN(val)) return;
+    if (isNaN(val) || isNaN(idx)) return;
 
-    const newArray = structure.update(structure.get().length, val);
-
+    const newArray = structure.update(idx, val);
     setDisplayArray(newArray);
   }
 
@@ -39,7 +41,7 @@ export default function Array() {
   }
 
   return (
-    <div className="w-full sm:max-w-4xl mx-auto space-y-12 py-8">
+    <div className="w-full sm:max-w-4xl sm:min-w-lg mx-auto space-y-12 py-8">
       <header className="flex flex-col items-center">
         <h2 className="font-bold text-xl sm:text-3xl text-slate-900">
           Visualizador de Array
@@ -73,7 +75,7 @@ export default function Array() {
                     : "#cad5e2",
               }}
               className={clsx(
-                "relative flex flex-col max-sm:w-15 max-sm:h-15 w-18 h-18 items-center justify-center border-2 rounded shadow-2xl transition",
+                "relative flex flex-col max-sm:w-15 max-sm:h-15 w-18 h-18 items-center justify-center border rounded shadow-2xl transition",
               )}
             >
               <span className="absolute top-1 text-[10px] font-bold text-slate-900/80">
@@ -94,27 +96,16 @@ export default function Array() {
         })}
       </div>
 
-      <section>
-        <div>
-          <div>
-            <input
-              type="number"
-              value={inputValue}
-              placeholder="Valor"
-              onChange={(e) => setInputValue(e.target.value)}
-              className="w-[80%] border-2 rounded-lg border-slate-900/80 px-2 outline-0"
-            />
-          </div>
-          <div>
-            <button onClick={handleUpdate} disabled={isPlaying}>
-              Inserir
-            </button>
-            <button onClick={handleSearch} disabled={isPlaying}>
-              Buscar
-            </button>
-          </div>
-        </div>
-      </section>
+      <ControlPanel
+        inputValue={inputValue}
+        setInputValue={setInputValue}
+        inputIndex={inputIndex}
+        setInputIndex={setInputIndex}
+        isPlaying={isPlaying}
+        currentStep={currentStep}
+        handleUpdate={handleUpdate}
+        handleSearch={handleSearch}
+      />
     </div>
   );
 }
