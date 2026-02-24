@@ -24,12 +24,12 @@ export function Sidebar() {
       href: "/",
       icon: <LayoutPanelLeftIcon />,
     },
-    { name: "Array", href: "/structure/array", icon: <BracketsIcon /> },
-    { name: "Stack", href: "/structure/stack", icon: <LayersIcon /> },
-    { name: "Queue", href: "/structure/queue", icon: <ListOrderedIcon /> },
+    { name: "Array", href: "/array", icon: <BracketsIcon /> },
+    { name: "Stack", href: "/stack", icon: <LayersIcon /> },
+    { name: "Queue", href: "/queue", icon: <ListOrderedIcon /> },
     {
       name: "Deque",
-      href: "/structure/double-ended-queue",
+      href: "/double-ended-queue",
       icon: <MoveHorizontalIcon />,
     },
   ];

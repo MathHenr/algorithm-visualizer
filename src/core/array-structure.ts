@@ -3,7 +3,7 @@ import { AnimationStep } from "@/types/animation";
 export class ArrayStructure<T> {
   private items: Array<T | null>;
 
-  private constructor(size: number) {
+  constructor(size: number) {
     this.items = new Array(size).fill(null);
   }
 
