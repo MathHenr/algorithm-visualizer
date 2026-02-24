@@ -8,8 +8,8 @@ export class ArrayStructure<T> {
   }
 
   // Implementing a visual linear search
-  find(value: T): { steps: AnimationStep[] } {
-    const steps: AnimationStep[] = [];
+  find(value: T): { steps: AnimationStep<T>[] } {
+    const steps: AnimationStep<T>[] = [];
 
     for (let i = 0; i < this.items.length; i++) {
       steps.push({

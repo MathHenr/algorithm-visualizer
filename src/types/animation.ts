@@ -1,10 +1,14 @@
-export interface AnimationStep {
+export interface AnimationStep<T> {
   type: "VISIT" | "COMPARE" | "FOUND" | "ERRORS";
-  payload: unknown;
+  payload:
+    | { index: number }
+    | { value: T; index?: number }
+    | { from: number; to: number }
+    | null;
   message: string;
 }
 
 export interface Simulate<T> {
   finalState: T;
-  steps: AnimationStep[];
+  steps: AnimationStep<T>[];
 }
