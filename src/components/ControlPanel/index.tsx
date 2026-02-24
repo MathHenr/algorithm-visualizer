@@ -12,6 +12,7 @@ interface ControlPanelProps {
   currentStep: AnimationStep | null;
   handleUpdate: () => void;
   handleSearch: () => void;
+  handleDelete: () => void;
 }
 
 export function ControlPanel({
@@ -23,6 +24,7 @@ export function ControlPanel({
   currentStep,
   handleSearch,
   handleUpdate,
+  handleDelete,
 }: ControlPanelProps) {
   return (
     <section className="flex flex-col gap-4 items-center p-3 border border-slate-300/50 shadow-lg rounded">
@@ -66,10 +68,13 @@ export function ControlPanel({
 
         <div className="flex flex-col gap-4">
           <Button handle={handleUpdate} isPlaying={isPlaying}>
-            Inserir
+            Inserir valor
           </Button>
           <Button handle={handleSearch} isPlaying={isPlaying}>
-            Buscar
+            Buscar valor
+          </Button>
+          <Button handle={handleDelete} isPlaying={isPlaying}>
+            Deletar índice
           </Button>
         </div>
       </div>

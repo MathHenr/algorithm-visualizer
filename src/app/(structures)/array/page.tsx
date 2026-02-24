@@ -40,6 +40,15 @@ export default function Array() {
     await play(steps, 800);
   }
 
+  async function handleDelete() {
+    const idx = parseInt(inputIndex);
+
+    if (isNaN(idx)) return;
+
+    const newArray = structure.delete(idx);
+    setDisplayArray(newArray);
+  }
+
   return (
     <div className="w-full sm:max-w-4xl sm:min-w-lg mx-auto space-y-12 py-8">
       <header className="flex flex-col items-center">
@@ -75,8 +84,10 @@ export default function Array() {
                     : "#cad5e2",
               }}
               className={clsx(
-                "relative flex flex-col max-sm:w-15 max-sm:h-15 w-18 h-18 items-center justify-center border rounded shadow-2xl transition",
+                "relative flex flex-col max-sm:w-15 max-sm:h-15 w-18 h-18 items-center justify-center border rounded shadow-2xl overflow-hidden",
               )}
+              title={item?.toString()}
+              aria-label={item?.toString()}
             >
               <span className="absolute top-1 text-[10px] font-bold text-slate-900/80">
                 index: {index}
@@ -105,6 +116,7 @@ export default function Array() {
         currentStep={currentStep}
         handleUpdate={handleUpdate}
         handleSearch={handleSearch}
+        handleDelete={handleDelete}
       />
     </div>
   );
