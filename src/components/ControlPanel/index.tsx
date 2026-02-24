@@ -1,5 +1,7 @@
 import { AnimationStep } from "@/types/animation";
 import { motion } from "framer-motion";
+import { Input } from "../Input";
+import { Button } from "../Button";
 
 interface ControlPanelProps {
   inputValue: string;
@@ -34,44 +36,41 @@ export function ControlPanel({
           </motion.p>
         </div>
       </div>
-      <div className="flex flex-col bg-red-400 gap-4 border-t-2 border-slate-800/50 py-4">
-        <div className="space-y-4">
-          <label htmlFor="valor">Valor:</label>
-          <input
-            id="valor"
-            name="valor"
-            type="number"
-            value={inputValue}
-            placeholder="Valor"
-            onChange={(e) => setInputValue(e.target.value)}
-            className="w-[80%] border-2 rounded-lg border-slate-900/80 px-2 outline-0"
-          />
-          <label htmlFor="index">Índice</label>
-          <input
-            id="index"
-            name="index"
-            type="number"
-            value={inputIndex}
-            placeholder="Índice"
-            onChange={(e) => setInputIndex(e.target.value)}
-            className="w-[80%] border-2 rounded-lg border-slate-900/80 px-2 outline-0"
-          />
+      <div className="flex flex-col w-full gap-4 border-t-2 border-slate-800/50 py-4">
+        <div className="flex flex-col gap-4">
+          <span className="flex flex-col">
+            <Input
+              id="value"
+              name="value"
+              type="number"
+              placeholder="valor"
+              value={inputValue}
+              changeValue={setInputValue}
+            >
+              Valor:
+            </Input>
+          </span>
+          <span className="flex flex-col">
+            <Input
+              id="index"
+              name="index"
+              type="number"
+              placeholder="índice"
+              value={inputIndex}
+              changeValue={setInputIndex}
+            >
+              Índice:
+            </Input>
+          </span>
         </div>
-        <div className="space-x-4">
-          <button
-            className="p-2 rounded bg-slate-400 text-slate-900"
-            onClick={handleUpdate}
-            disabled={isPlaying}
-          >
+
+        <div className="flex flex-col gap-4">
+          <Button handle={handleUpdate} isPlaying={isPlaying}>
             Inserir
-          </button>
-          <button
-            className="p-2 rounded bg-slate-400 text-slate-900"
-            onClick={handleSearch}
-            disabled={isPlaying}
-          >
+          </Button>
+          <Button handle={handleSearch} isPlaying={isPlaying}>
             Buscar
-          </button>
+          </Button>
         </div>
       </div>
     </section>
