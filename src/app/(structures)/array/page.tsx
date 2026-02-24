@@ -4,40 +4,38 @@ import { ArrayStructure } from "@/core/array-structure";
 import { useAnimationPlayer } from "@/hooks/useAnimationPlayer";
 import clsx from "clsx";
 import { AnimatePresence, motion } from "framer-motion";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function Array() {
-  const [structure] = useState(new ArrayStructure<number>(5));
+  const [structure] = useState(new ArrayStructure<number>(0));
 
   const [inputValue, setInputValue] = useState("");
-  const [inputIndex, setInputIndex] = useState("");
 
-  const [displayArray, setDisplayArray] = useState<(number | null)[]>([
-    1,
-    2,
-    3,
-    4,
-    4,
-    3,
-    4,
-    4,
-    3,
-    4,
-    4,
-    3,
-    4,
-    4,
-    null,
-  ]);
+  const [displayArray, setDisplayArray] = useState<(number | null)[]>([]);
 
   const { currentStep, isPlaying, play } = useAnimationPlayer();
+
+  useEffect(() => {
+    setDisplayArray(structure.get());
+  }, [structure]);
+
+  async function handleUpdate() {
+    const val = parseInt(inputValue);
+
+    if (isNaN(val)) return;
+
+    const newArray = structure.update(structure.get().length, val);
+
+    setDisplayArray(newArray);
+  }
 
   async function handleSearch() {
     const val = parseInt(inputValue);
 
     if (isNaN(val)) return;
 
-    await play(steps);
+    const steps = structure.find(val);
+    await play(steps, 800);
   }
 
   return (
@@ -63,16 +61,19 @@ export default function Array() {
           return (
             <motion.div
               key={index}
-              initial={false}
+              initial={{ opacity: 0, x: 5 }}
               animate={{
-                backgroundColor: isVisiting
-                  ? "yellow"
-                  : isFound
-                    ? "green"
-                    : "transparent",
+                opacity: 1,
+                x: 0,
+                scale: isFound || isVisiting ? 1.05 : 1,
+                backgroundColor: isFound
+                  ? "#10b95c"
+                  : isVisiting
+                    ? "#c9c71b"
+                    : "#cad5e2",
               }}
               className={clsx(
-                "relative flex flex-col max-sm:w-15 max-sm:h-15 w-18 h-18 items-center justify-center border-2 rounded shadow-2xl",
+                "relative flex flex-col max-sm:w-15 max-sm:h-15 w-18 h-18 items-center justify-center border-2 rounded shadow-2xl transition",
               )}
             >
               <span className="absolute top-1 text-[10px] font-bold text-slate-900/80">
@@ -81,7 +82,7 @@ export default function Array() {
               <AnimatePresence mode="wait">
                 <motion.span
                   key={item}
-                  initial={{ opacity: 0, y: 10 }}
+                  initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   className="text-lg font-bold text-slate-900/80"
                 >
@@ -100,16 +101,14 @@ export default function Array() {
               type="number"
               value={inputValue}
               placeholder="Valor"
-              className="w-[80%] border-2 rounded-lg border-slate-900/80 px-2 outline-0"
-            />
-            <input
-              type="number"
-              value={inputIndex}
-              placeholder="Índice"
+              onChange={(e) => setInputValue(e.target.value)}
               className="w-[80%] border-2 rounded-lg border-slate-900/80 px-2 outline-0"
             />
           </div>
           <div>
+            <button onClick={handleUpdate} disabled={isPlaying}>
+              Inserir
+            </button>
             <button onClick={handleSearch} disabled={isPlaying}>
               Buscar
             </button>
