@@ -13,11 +13,13 @@ export function Content({ children }: ContentProp) {
   return (
     <div
       className={clsx(
-        "flex-1 h-full p-10 text-salte-900 overflow-y-auto overflow-x-hidden transition-all ease-in-out duration-5000",
+        "flex-1 h-full p-2 sm:p-10 overflow-y-auto overflow-x-hidden transition-all ease-in-out duration-300",
         isOpen ? "max-sm:hidden" : "flex",
       )}
     >
-      <div className={clsx("max-w-7xl mx-auto")}> {children} </div>
+      <div className={clsx("max-w-60 sm:max-w-2xl lg:max-w-7xl mx-auto")}>
+        {children}
+      </div>
     </div>
   );
 }
