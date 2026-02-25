@@ -1,6 +1,10 @@
+import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
+import { vscDarkPlus } from "react-syntax-highlighter/dist/esm/styles/prism";
 import { Container } from "@/components/Container";
 
 export function Content() {
+  const structure = `const diasDaSemana = ['Segunda', 'Terça', 'Quarta']`;
+
   return (
     <Container className="flex-col justify-center gap-4 p-4">
       <h1 className="font-extrabold text-3xl text-slate-900/80 sm:text-4xl">
@@ -23,6 +27,11 @@ export function Content() {
           number.
         </p>
       </div>
+      <span className="rounded-xl overflow-hidden">
+        <SyntaxHighlighter language="typescript" style={vscDarkPlus}>
+          {structure}
+        </SyntaxHighlighter>
+      </span>
     </Container>
   );
 }
