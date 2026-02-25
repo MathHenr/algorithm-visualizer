@@ -6,6 +6,8 @@ import { useAnimationPlayer } from "@/hooks/useAnimationPlayer";
 import clsx from "clsx";
 import { AnimatePresence, motion } from "framer-motion";
 import { useEffect, useState } from "react";
+import { Content } from "./content";
+import { Container } from "@/components/Container";
 
 export default function Array() {
   const [structure] = useState(new ArrayStructure<number>(0));
@@ -21,14 +23,15 @@ export default function Array() {
     setDisplayArray(structure.get());
   }, [structure]);
 
-  async function handleUpdate() {
+  function handleUpdate() {
     const val = parseInt(inputValue);
-    const idx = inputIndex ? parseInt(inputIndex) : structure.get().length;
+    const idx = parseInt(inputIndex) || structure.get().length;
 
     if (isNaN(val) || isNaN(idx)) return;
 
     const newArray = structure.update(idx, val);
     setDisplayArray(newArray);
+    return;
   }
 
   async function handleSearch() {
@@ -37,10 +40,10 @@ export default function Array() {
     if (isNaN(val)) return;
 
     const steps = structure.find(val);
-    await play(steps, 800);
+    await play(steps, 500);
   }
 
-  async function handleDelete() {
+  function handleDelete() {
     const idx = parseInt(inputIndex);
 
     if (isNaN(idx)) return;
@@ -51,16 +54,17 @@ export default function Array() {
 
   return (
     <div className="w-full sm:max-w-4xl sm:min-w-lg mx-auto space-y-12 py-8">
-      <header className="flex flex-col items-center">
-        <h2 className="font-bold text-xl sm:text-3xl text-slate-900">
+      <Content />
+      <header className="flex flex-col max-sm:items-center">
+        <h2 className="font-bold text-xl sm:text-3xl text-slate-900/80">
           Visualizador de Array
         </h2>
-        <p className="text-slate-800 text-sm sm:text-base">
+        <p className="text-slate-800/80 text-sm sm:text-base">
           A estrutura de dados mais simples.
         </p>
       </header>
 
-      <div className="flex flex-wrap w-full justify-center gap-4 p-8 border border-slate-300/50 shadow-lg rounded">
+      <Container className="flex flex-wrap w-full justify-center gap-4 p-8 border border-slate-300/50 shadow-lg rounded">
         {displayArray.map((item, index) => {
           const isVisiting =
             currentStep?.type === "VISIT" &&
@@ -78,18 +82,16 @@ export default function Array() {
                 x: 0,
                 scale: isFound || isVisiting ? 1.05 : 1,
                 backgroundColor: isFound
-                  ? "#10b95c"
+                  ? "#5ee9b6e8"
                   : isVisiting
-                    ? "#c9c71b"
+                    ? "#fff185e8"
                     : "#cad5e2",
               }}
-              className={clsx(
-                "relative flex flex-col max-sm:w-15 max-sm:h-15 w-18 h-18 items-center justify-center border rounded shadow-2xl overflow-hidden",
-              )}
+              className="relative flex flex-col max-sm:w-15 max-sm:h-15 w-18 h-18 items-center justify-center border rounded shadow-2xl overflow-hidden transition"
               title={item?.toString()}
               aria-label={item?.toString()}
             >
-              <span className="absolute top-1 text-[10px] font-bold text-slate-900/80">
+              <span className="absolute top-1 text-[10px] font-bold text-red-700/80">
                 index: {index}
               </span>
               <AnimatePresence mode="wait">
@@ -97,7 +99,14 @@ export default function Array() {
                   key={item}
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
-                  className="text-lg font-bold text-slate-900/80"
+                  className={clsx(
+                    "text-lg",
+                    isFound
+                      ? "text-slate-900/80 font-extrabold"
+                      : isVisiting
+                        ? "text-slate-800/80 font-bold"
+                        : "text-slate-900",
+                  )}
                 >
                   {item ?? "-"}
                 </motion.span>
@@ -105,7 +114,7 @@ export default function Array() {
             </motion.div>
           );
         })}
-      </div>
+      </Container>
 
       <ControlPanel
         inputValue={inputValue}

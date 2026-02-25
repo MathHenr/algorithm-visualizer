@@ -34,13 +34,13 @@ export function ControlPanel({
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
           >
-            {currentStep?.message || "Waiting command ..."}
+            {currentStep?.message || "Aguardando comando ..."}
           </motion.p>
         </div>
       </div>
       <div className="flex flex-col w-full gap-4 border-t-2 border-slate-800/50 py-4">
-        <div className="flex flex-col gap-4">
-          <span className="flex flex-col">
+        <div className="flex flex-col w-full gap-4">
+          <span className="flex max-sm:flex-col sm:justify-center sm:items-center sm:gap-4">
             <Input
               id="value"
               name="value"
@@ -52,7 +52,7 @@ export function ControlPanel({
               Valor:
             </Input>
           </span>
-          <span className="flex flex-col">
+          <span className="flex max-sm:flex-col sm:justify-center sm:items-center sm:gap-2">
             <Input
               id="index"
               name="index"
@@ -66,7 +66,7 @@ export function ControlPanel({
           </span>
         </div>
 
-        <div className="flex flex-col gap-4">
+        <div className="flex max-sm:flex-col sm:justify-center gap-4">
           <Button handle={handleUpdate} isPlaying={isPlaying}>
             Inserir valor
           </Button>
