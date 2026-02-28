@@ -22,7 +22,7 @@ This project is currently under active development. The core architecture is bei
 - [ ] Interactive User Dashboard (Play/Pause/Speed controls)
 - [ ] Dark/Light mode support
 
-### 3. Visualization **In Progress**
+### 3. Visualization 
 
 - [ ] **Data Structures:** (Linked Lists, Trees, Graphs) 
 - [ ] Interactive data input (Randomize/Custom data sets)
