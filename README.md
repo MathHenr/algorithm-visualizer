@@ -12,7 +12,7 @@ This project is currently under active development. The core architecture is bei
 - [x] Project folder structure organization
 - [x] Basic layout & Sidebar "Push" logic implementation
 - [ ] Complete **App Router** migration & Route Groups
-- [ ] Global state management for algorithm control
+- [x] Global state management for algorithm control
 
 ### 2. UI/UX & Animations
 
@@ -22,9 +22,9 @@ This project is currently under active development. The core architecture is bei
 - [ ] Interactive User Dashboard (Play/Pause/Speed controls)
 - [ ] Dark/Light mode support
 
-### 3. Visualization
+### 3. Visualization **In Progress**
 
-- [ ] **Data Structures:** (Linked Lists, Trees, Graphs)
+- [ ] **Data Structures:** (Linked Lists, Trees, Graphs) 
 - [ ] Interactive data input (Randomize/Custom data sets)
 - [ ] Real-time pseudo-code highlighting
 
@@ -44,7 +44,7 @@ This project is currently under active development. The core architecture is bei
 
 ## ✒️ Author
 
-**Matheus** -
+**Matheus Henrique - MathHenr** -
 
 ---
 
