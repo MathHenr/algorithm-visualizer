@@ -64,7 +64,7 @@ export function Sidebar() {
             isOpen ? "text-center font-extrabold text-2xl" : "hidden",
           )}
         >
-          Algorithm Visualizer
+          Data Structure Visualizer
         </h2>
         <Link href="#" className={clsx("mb-2", isOpen ? "block" : "hidden")}>
           By{" "}

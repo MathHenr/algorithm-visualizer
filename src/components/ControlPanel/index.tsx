@@ -32,7 +32,16 @@ export function ControlPanel({
         <div className="py-2 text-slate-900/80 font-bold">
           <motion.p
             initial={{ opacity: 0, y: -10 }}
-            animate={{ opacity: 1, y: 0 }}
+            animate={{
+              opacity: 1,
+              y: 0,
+              color:
+                currentStep?.type === "ERRORS"
+                  ? "#82181a"
+                  : currentStep?.type === "FOUND"
+                    ? "#016630"
+                    : "#0f172b",
+            }}
           >
             {currentStep?.message || "Aguardando comando ..."}
           </motion.p>
