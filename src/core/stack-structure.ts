@@ -6,15 +6,32 @@ export class Stack<T> {
   }
 
   // future methods
-  peek() {}
+  peek() {
+    return this.#items[this.#items.length - 1];
+  }
 
-  pop() {}
+  pop() {
+    return this.#items.pop();
+  }
 
-  push() {}
+  push(value: T) {
+    return this.#items.push(value);
+  }
 
-  isEmpty() {}
+  isEmpty() {
+    return this.#items.length === 0;
+  }
 
-  clear() {}
+  clear() {
+    this.#items = [];
+    return;
+  }
 
-  size() {}
+  size() {
+    return this.#items.length;
+  }
+
+  get() {
+    return [...this.#items];
+  }
 }

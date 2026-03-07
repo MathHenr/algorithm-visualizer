@@ -1,35 +1,8 @@
-import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
-import { vscDarkPlus } from "react-syntax-highlighter/dist/esm/styles/prism";
-import { Container } from "@/components/Container";
+import { Wrapper } from "@/components/Wrapper";
 
 export function Content() {
-  const structure = `class ArrayStructure<T> {
-    #items: Array<T | null>;
-
-    constructor(size: number) {
-      this.#items = new Array(size).fill(null);
-    }
-
-    find(value: T): AnimationStep[] {
-      // Do a linear search, once the array could be unsorted,
-      // and return AnimationStep[] that deals with animation.
-    }
-
-    delete(index: number) {
-      // Delete the given index with splice() method.
-    }
-
-    update(index: number, value: T) {
-      // Insert value at the given index
-    }
-
-    get() {
-      // Return array state.
-    }
-  }`;
-
   return (
-    <Container className="flex-col justify-center gap-4 p-4">
+    <Wrapper className="flex-col justify-center gap-4 p-4">
       <h1 className="font-extrabold text-3xl text-slate-900/80 sm:text-4xl">
         Array
       </h1>
@@ -60,15 +33,7 @@ export function Content() {
           projetado para implementar boas práticas, deixarei apenas a tipagem de
           number.
         </p>
-        <span className="text-base font-bold text-slate-800/80">
-          Aqui mostro como foi construído a classe dessa sessão.
-        </span>
-        <span className="rounded-xl overflow-hidden">
-          <SyntaxHighlighter language="typescript" style={vscDarkPlus}>
-            {structure}
-          </SyntaxHighlighter>
-        </span>
       </div>
-    </Container>
+    </Wrapper>
   );
 }

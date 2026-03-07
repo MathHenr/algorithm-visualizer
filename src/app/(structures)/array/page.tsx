@@ -7,7 +7,9 @@ import clsx from "clsx";
 import { AnimatePresence, motion } from "framer-motion";
 import { useEffect, useState } from "react";
 import { Content } from "./content";
+import { Wrapper } from "@/components/Wrapper";
 import { Container } from "@/components/Container";
+import { Header } from "@/components/Header";
 
 export default function Array() {
   const [structure] = useState(new ArrayStructure<number>(0));
@@ -53,18 +55,14 @@ export default function Array() {
   }
 
   return (
-    <div className="w-full sm:max-w-4xl sm:min-w-lg mx-auto space-y-12 py-8">
+    <Container>
       <Content />
-      <header className="flex flex-col max-sm:items-center">
-        <h2 className="font-bold text-xl sm:text-3xl text-slate-900/80">
-          Visualizador de Array
-        </h2>
-        <p className="text-slate-800/80 text-sm sm:text-base">
-          A estrutura de dados mais simples.
-        </p>
-      </header>
+      <Header
+        title="Visualizador de Array"
+        subTitle="A estrutura de dados mais simples."
+      />
 
-      <Container className="flex flex-wrap w-full justify-center gap-4 p-8 border border-slate-300/50 shadow-lg rounded">
+      <Wrapper className="flex flex-wrap w-full justify-center gap-4 p-8 border-slate-300/50">
         {displayArray.map((item, index) => {
           const isVisiting =
             currentStep?.type === "VISIT" &&
@@ -114,7 +112,7 @@ export default function Array() {
             </motion.div>
           );
         })}
-      </Container>
+      </Wrapper>
 
       <ControlPanel
         inputValue={inputValue}
@@ -127,6 +125,6 @@ export default function Array() {
         handleSearch={handleSearch}
         handleDelete={handleDelete}
       />
-    </div>
+    </Container>
   );
 }
