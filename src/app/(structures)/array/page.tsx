@@ -14,9 +14,6 @@ import { Header } from "@/components/Header";
 export default function Array() {
   const [structure] = useState(new ArrayStructure<number>(0));
 
-  const [inputValue, setInputValue] = useState("");
-  const [inputIndex, setInputIndex] = useState("");
-
   const [displayArray, setDisplayArray] = useState<(number | null)[]>([]);
 
   const { currentStep, isPlaying, play } = useAnimationPlayer();
@@ -25,44 +22,14 @@ export default function Array() {
     setDisplayArray(structure.get());
   }, [structure]);
 
-  function handleUpdate() {
-    const val = parseInt(inputValue);
-    const idx = parseInt(inputIndex) || structure.get().length;
-
-    if (isNaN(val) || isNaN(idx)) return;
-
-    const newArray = structure.update(idx, val);
-    setDisplayArray(newArray);
-    return;
-  }
-
-  async function handleSearch() {
-    const val = parseInt(inputValue);
-
-    if (isNaN(val)) return;
-
-    const steps = structure.find(val);
-    await play(steps, 500);
-  }
-
-  function handleDelete() {
-    const idx = parseInt(inputIndex);
-
-    if (isNaN(idx)) return;
-
-    const newArray = structure.delete(idx);
-    setDisplayArray(newArray);
-  }
-
   return (
     <Container>
-      <Content />
       <Header
         title="Visualizador de Array"
         subTitle="A estrutura de dados mais simples."
       />
 
-      <Wrapper className="flex flex-wrap w-full justify-center gap-4 p-8 border-slate-300/50">
+      <Wrapper className="flex flex-wrap w-full justify-center gap-4">
         {displayArray.map((item, index) => {
           const isVisiting =
             currentStep?.type === "VISIT" &&
@@ -115,16 +82,14 @@ export default function Array() {
       </Wrapper>
 
       <ControlPanel
-        inputValue={inputValue}
-        setInputValue={setInputValue}
-        inputIndex={inputIndex}
-        setInputIndex={setInputIndex}
+        play={play}
         isPlaying={isPlaying}
         currentStep={currentStep}
-        handleUpdate={handleUpdate}
-        handleSearch={handleSearch}
-        handleDelete={handleDelete}
+        structure={structure}
+        setDisplay={setDisplayArray}
       />
+
+      <Content />
     </Container>
   );
 }

@@ -1,21 +1,61 @@
+import { AnimationStep } from "@/types/animation";
+
 export class Stack<T> {
   #items: (T | null)[];
 
-  private constructor(size: number) {
-    this.#items = new Array(size).fill(null);
+  constructor() {
+    this.#items = [];
   }
 
-  // future methods
   peek() {
-    return this.#items[this.#items.length - 1];
+    const steps: AnimationStep[] = [];
+
+    const lastIndex = this.#items.length > 1 ? this.#items.length - 1 : 0;
+
+    steps.push({
+      type: "VISIT",
+      payload: { index: lastIndex },
+      message: "Peeking value at the top of the stack.",
+    });
+
+    return { steps, item: this.#items[this.#items.length - 1] };
   }
 
   pop() {
-    return this.#items.pop();
+    const steps: AnimationStep[] = [];
+
+    if (this.#items.length < 1) {
+      steps.push({
+        type: "ERRORS",
+        payload: null,
+        message: "Stack is already empty.",
+      });
+      return { steps, items: [...this.#items] };
+    }
+
+    steps.push({
+      type: "FOUND",
+      payload: { index: this.#items.length - 1 },
+      message: `Removed value at the top of the stack: ${this.#items[this.#items.length - 1]}`,
+    });
+
+    this.#items.pop();
+
+    return { steps, items: [...this.#items] };
   }
 
   push(value: T) {
-    return this.#items.push(value);
+    const steps: AnimationStep[] = [];
+
+    steps.push({
+      type: "FOUND",
+      payload: { index: this.#items.length },
+      message: `Pushing value ${value} at the top.`,
+    });
+
+    this.#items.push(value);
+
+    return { steps, items: [...this.#items] };
   }
 
   isEmpty() {
