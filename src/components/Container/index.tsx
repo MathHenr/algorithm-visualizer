@@ -1,17 +1,10 @@
-import clsx from "clsx";
-
-type ContainerProp = {
+type ContainerProps = {
   children: React.ReactNode;
-} & React.ComponentProps<"div">;
+};
 
-export function Container({ children, ...rest }: ContainerProp) {
+export function Container({ children }: ContainerProps) {
   return (
-    <div
-      className={clsx(
-        "flex border border-slate-300/50 shadow-lg rounded",
-        rest.className,
-      )}
-    >
+    <div className="w-full sm:max-w-4xl sm:min-w-lg mx-auto space-y-12 py-8">
       {children}
     </div>
   );
