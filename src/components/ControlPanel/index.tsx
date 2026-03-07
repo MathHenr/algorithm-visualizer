@@ -1,31 +1,78 @@
+import { useState } from "react";
 import { AnimationStep } from "@/types/animation";
 import { motion } from "framer-motion";
 import { Input } from "../Input";
 import { Button } from "../Button";
+import { ArrayStructure } from "@/core/array-structure";
+import { Stack } from "@/core/stack-structure";
 
 interface ControlPanelProps {
-  inputValue: string;
-  setInputValue: React.Dispatch<React.SetStateAction<string>>;
-  inputIndex: string;
-  setInputIndex: React.Dispatch<React.SetStateAction<string>>;
+  play: (steps: AnimationStep[], speed: number) => Promise<void>;
   isPlaying: boolean;
   currentStep: AnimationStep | null;
-  handleUpdate: () => void;
-  handleSearch: () => void;
-  handleDelete: () => void;
+  structure: ArrayStructure<number> | Stack<number>;
+  setDisplay: React.Dispatch<React.SetStateAction<(number | null)[]>>;
 }
 
 export function ControlPanel({
-  inputIndex,
-  setInputIndex,
-  inputValue,
-  setInputValue,
+  play,
   isPlaying,
   currentStep,
-  handleSearch,
-  handleUpdate,
-  handleDelete,
+  structure,
+  setDisplay,
 }: ControlPanelProps) {
+  const [inputValue, setInputValue] = useState("");
+  const [inputIndex, setInputIndex] = useState("");
+
+  function handleUpdate() {
+    const val = parseInt(inputValue);
+
+    if (isNaN(val)) return;
+
+    switch (true) {
+      case structure instanceof ArrayStructure: {
+        const idx = parseInt(inputIndex) || structure.get().length;
+        setDisplay(structure.push(idx, val));
+        return;
+      }
+      case structure instanceof Stack: {
+        const result = structure.push(val);
+        setDisplay(result.items);
+        return;
+      }
+    }
+  }
+
+  async function handleSearch() {
+    const val = parseInt(inputValue);
+
+    if (isNaN(val)) return;
+
+    switch (true) {
+      case structure instanceof ArrayStructure: {
+        const steps = structure.find(val);
+        await play(steps, 500);
+      }
+    }
+  }
+
+  function handleDelete() {
+    switch (true) {
+      case structure instanceof ArrayStructure: {
+        const idx = parseInt(inputIndex);
+        if (isNaN(idx)) return;
+        setDisplay(structure.pop(idx));
+        return;
+      }
+      case structure instanceof Stack: {
+        const { items } = structure.pop();
+        if (items.length < 1) return setDisplay([]);
+        setDisplay(items);
+        return;
+      }
+    }
+  }
+
   return (
     <section className="flex flex-col gap-4 items-center p-3 border border-slate-300/50 shadow-lg rounded">
       <div className="text-base/relaxed font-bold">

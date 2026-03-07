@@ -32,12 +32,12 @@ export class ArrayStructure<T> {
     return steps;
   }
 
-  delete(index: number) {
+  pop(index: number) {
     this.#items.splice(index, 1);
     return [...this.#items];
   }
 
-  update(index: number, value: T) {
+  push(index: number, value: T) {
     this.#items[index] = value;
     return [...this.#items];
   }

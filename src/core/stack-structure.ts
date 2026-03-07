@@ -3,60 +3,57 @@ import { AnimationStep } from "@/types/animation";
 export class Stack<T> {
   #items: (T | null)[];
 
-  private constructor(size: number) {
+  constructor(size: number) {
     this.#items = new Array(size).fill(null);
   }
 
-  // future methods
-  peek(): AnimationStep[] {
+  peek() {
     const steps: AnimationStep[] = [];
 
     steps.push({
       type: "VISIT",
       payload: { index: this.#items.length - 1 },
-      message: "Pegando o elemento do topo da pilha.",
+      message: "Peeking value at the top of the stack.",
     });
 
-    return steps;
+    return { steps, items: this.#items[this.#items.length - 1] };
   }
 
-  pop(): AnimationStep[] {
+  pop() {
     const steps: AnimationStep[] = [];
 
     if (this.#items.length < 1) {
       steps.push({
         type: "ERRORS",
         payload: null,
-        message: "A pilha está vazia.",
+        message: "Stack is already empty.",
       });
-      return steps;
+      return { steps, items: [...this.#items] };
     }
 
-    // Salvando eliminação no array de animação
     steps.push({
       type: "FOUND",
       payload: { index: this.#items.length - 1 },
-      message: `Removendo o item do topo: ${this.#items[this.#items.length - 1]}`,
+      message: `Removed value at the top of the stack: ${this.#items[this.#items.length - 1]}`,
     });
 
-    // Removendo o último elemento
     this.#items.pop();
 
-    return steps;
+    return { steps, items: [...this.#items] };
   }
 
-  push(value: T): AnimationStep[] {
+  push(value: T) {
     const steps: AnimationStep[] = [];
 
     steps.push({
       type: "VISIT",
       payload: { index: this.#items.length },
-      message: `Inserindo o valor ${value} no topo da pilha`,
+      message: `Pushing value ${value} at the top.`,
     });
 
-    this.#items.push();
+    this.#items.push(value);
 
-    return steps;
+    return { steps, items: [...this.#items] };
   }
 
   isEmpty() {
