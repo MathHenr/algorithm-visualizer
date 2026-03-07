@@ -46,7 +46,7 @@ export class Stack<T> {
     const steps: AnimationStep[] = [];
 
     steps.push({
-      type: "VISIT",
+      type: "FOUND",
       payload: { index: this.#items.length },
       message: `Pushing value ${value} at the top.`,
     });

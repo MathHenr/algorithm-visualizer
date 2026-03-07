@@ -24,7 +24,7 @@ export function ControlPanel({
   const [inputValue, setInputValue] = useState("");
   const [inputIndex, setInputIndex] = useState("");
 
-  function handleUpdate() {
+  async function handleUpdate() {
     const val = parseInt(inputValue);
 
     if (isNaN(val)) return;
@@ -36,8 +36,9 @@ export function ControlPanel({
         return;
       }
       case structure instanceof Stack: {
-        const result = structure.push(val);
-        setDisplay(result.items);
+        const { steps, items } = structure.push(val);
+        setDisplay(items);
+        await play(steps, 1000);
         return;
       }
     }
@@ -56,7 +57,7 @@ export function ControlPanel({
     }
   }
 
-  function handleDelete() {
+  async function handleDelete() {
     switch (true) {
       case structure instanceof ArrayStructure: {
         const idx = parseInt(inputIndex);
@@ -65,9 +66,14 @@ export function ControlPanel({
         return;
       }
       case structure instanceof Stack: {
-        const { items } = structure.pop();
-        if (items.length < 1) return setDisplay([]);
+        const { steps, items } = structure.pop();
+        if (items.length < 1) {
+          setDisplay([]);
+          await play(steps, 1000);
+          return;
+        }
         setDisplay(items);
+        await play(steps, 1000);
         return;
       }
     }
