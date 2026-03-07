@@ -18,7 +18,7 @@ export function Content({ children }: ContentProp) {
         isOpen ? "max-sm:hidden" : "flex",
       )}
     >
-      <div className={clsx("max-w-60 sm:max-w-2xl lg:max-w-7xl mx-auto")}>
+      <div className={clsx("max-w-[75vw] sm:max-w-2xl lg:max-w-7xl mx-auto")}>
         {children}
       </div>
       <Footer />
