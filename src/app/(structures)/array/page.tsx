@@ -62,7 +62,7 @@ export default function Array() {
         subTitle="A estrutura de dados mais simples."
       />
 
-      <Wrapper className="flex flex-wrap w-full justify-center gap-4 p-8 border-slate-300/50">
+      <Wrapper className="flex flex-wrap w-full justify-center gap-4">
         {displayArray.map((item, index) => {
           const isVisiting =
             currentStep?.type === "VISIT" &&

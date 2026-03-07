@@ -8,7 +8,7 @@ export function Wrapper({ children, className, ...rest }: WrapperProp) {
   return (
     <div
       className={clsx(
-        "flex border border-slate-300/50 shadow-lg rounded",
+        "flex w-full p-8 border border-slate-300/50 shadow-lg rounded",
         className,
       )}
       {...rest}
