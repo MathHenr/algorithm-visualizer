@@ -16,7 +16,7 @@ export default function StackPage() {
   // Displayed structure
   const [displayStack, setDisplayStack] = useState<(number | null)[]>([]);
 
-  const { currentStep, isPlaying, play } = useAnimationPlayer();
+  const { currentStep, play } = useAnimationPlayer();
 
   useEffect(() => {
     setDisplayStack(structure.get());
@@ -82,7 +82,6 @@ export default function StackPage() {
 
       <ControlPanel
         play={play}
-        isPlaying={isPlaying}
         currentStep={currentStep}
         structure={structure}
         setDisplay={setDisplayStack}

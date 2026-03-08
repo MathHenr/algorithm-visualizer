@@ -8,7 +8,6 @@ import { Stack } from "@/core/stack-structure";
 
 interface ControlPanelProps {
   play: (steps: AnimationStep[], speed: number) => Promise<void>;
-  isPlaying: boolean;
   currentStep: AnimationStep | null;
   structure: ArrayStructure<number> | Stack<number>;
   setDisplay: React.Dispatch<React.SetStateAction<(number | null)[]>>;
@@ -16,7 +15,6 @@ interface ControlPanelProps {
 
 export function ControlPanel({
   play,
-  isPlaying,
   currentStep,
   structure,
   setDisplay,
@@ -130,15 +128,11 @@ export function ControlPanel({
         </div>
 
         <div className="flex max-sm:flex-col sm:justify-center gap-4">
-          <Button handle={handleUpdate} isPlaying={isPlaying}>
-            Inserir valor
+          <Button handle={handleUpdate}>Inserir</Button>
+          <Button handle={handleSearch} disabled={structure instanceof Stack}>
+            Buscar
           </Button>
-          <Button handle={handleSearch} isPlaying={isPlaying}>
-            Buscar valor
-          </Button>
-          <Button handle={handleDelete} isPlaying={isPlaying}>
-            Deletar índice
-          </Button>
+          <Button handle={handleDelete}>Deletar</Button>
         </div>
       </div>
     </section>

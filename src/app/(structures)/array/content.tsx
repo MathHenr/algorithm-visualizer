@@ -15,6 +15,18 @@ export function Content() {
           exemplo de alguns deles: push(), unshift(), pop(), shift(). Além de
           permitir diversos métodos de iteração pelo array.
         </p>
+        <p>
+          Aqui temos 3 botões:{" "}
+          <span className="font-bold text-slate-900/90">INSERIR</span> que tem
+          função de inserir um dado valor a um índice específico ou ao próximo
+          índice do array.{" "}
+          <span className="font-bold text-slate-900/90">BUSCAR</span> que
+          procura o valor determinado dentro do array, caso exista retorna o
+          índice que o valor foi encontrado ou Null. E por fim temos{" "}
+          <span className="font-bold text-slate-900/90">DELETAR</span> que
+          remove o índice determinado pelo usuário.
+        </p>
+
         <span>
           Os arrays ocupam espaços contiguous na memória, ou seja, ficam lado a
           lado sequencialmente, tendo tempo de execução de leitura O(n) mas para

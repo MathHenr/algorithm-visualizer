@@ -16,7 +16,7 @@ export default function Array() {
 
   const [displayArray, setDisplayArray] = useState<(number | null)[]>([]);
 
-  const { currentStep, isPlaying, play } = useAnimationPlayer();
+  const { currentStep, play } = useAnimationPlayer();
 
   useEffect(() => {
     setDisplayArray(structure.get());
@@ -83,7 +83,6 @@ export default function Array() {
 
       <ControlPanel
         play={play}
-        isPlaying={isPlaying}
         currentStep={currentStep}
         structure={structure}
         setDisplay={setDisplayArray}
